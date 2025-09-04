@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 public class WordFrequencyGame {
+    public record Input(String value, int wordCount) {}
 
     public static final String ANY_SPACE_SEPARATOR = "\\s+";
 
@@ -15,7 +16,7 @@ public class WordFrequencyGame {
         } else {
             try {
                 List<Input> frequencies = countFrequencies(words);
-                frequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+                frequencies.sort((w1, w2) -> w2.wordCount() - w1.wordCount());
                 return composeOutput(frequencies);
             } catch (Exception e) {
                 return "Calculate Error";
@@ -26,7 +27,7 @@ public class WordFrequencyGame {
     private String composeOutput(List<Input> frequencies) {
         StringJoiner joiner = new StringJoiner("\n");
         for (Input w : frequencies) {
-            String s = w.getValue() + " " + w.getWordCount();
+            String s = w.value() + " " + w.wordCount();
             joiner.add(s);
         }
         return joiner.toString();
