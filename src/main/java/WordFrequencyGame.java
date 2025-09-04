@@ -15,19 +15,21 @@ public class WordFrequencyGame {
         } else {
             try {
                 List<Input> frequencies = countFrequencies(words);
-
                 frequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
-
-                StringJoiner joiner = new StringJoiner("\n");
-                for (Input w : frequencies) {
-                    String s = w.getValue() + " " + w.getWordCount();
-                    joiner.add(s);
-                }
-                return joiner.toString();
+                return composeOutput(frequencies);
             } catch (Exception e) {
                 return "Calculate Error";
             }
         }
+    }
+
+    private String composeOutput(List<Input> frequencies) {
+        StringJoiner joiner = new StringJoiner("\n");
+        for (Input w : frequencies) {
+            String s = w.getValue() + " " + w.getWordCount();
+            joiner.add(s);
+        }
+        return joiner.toString();
     }
 
     private List<Input> countFrequencies(String[] words) {
@@ -59,6 +61,4 @@ public class WordFrequencyGame {
         }
         return map;
     }
-
-
 }
